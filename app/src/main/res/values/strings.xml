@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">USB PM Checker</string>
+    <string name="getUSBbutton">CHECK USB</string>
+    <string name="connectToUsb">ESTABLISH CONNECTION</string>
+    <string name="refresh">REFRESH</string>
+    <string name="autorefresh">AUTOREFRESH</string>
+    <string name="stop">STOP</string>
+    <string name="thermFlag">THERMRIP#</string>
+    <string name="su3Flag">SU3</string>
+    <string name="su5Flag">SU 5</string>
+    <string name="voltages">Voltages:</string>
+    <string name="temps">Temperatures:</string>
+    <string name="minorV">Minor Voltages:</string>
+</resources>
