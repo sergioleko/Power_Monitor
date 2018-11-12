@@ -29,7 +29,8 @@ public class shower extends AppCompatActivity {
         setContentView(R.layout.activity_shower);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setTitle("Linkos Power Monitor");
+        setTitle(" ");
+
         startReader();
 
 
@@ -89,10 +90,10 @@ public class shower extends AppCompatActivity {
                 String outputText = String.valueOf(names[c]) + "\t = \t" + String.valueOf(dataList.get(c));
                 output.setText(outputText);
                 if ((dataList.get(c) > maxValues[c] || dataList.get(c) < minvalues[c])){
-                    output.setTextColor(Color.RED);
+                    output.setTextColor(Color.parseColor("#ffff4444"));
                 }
                 else {
-                    output.setTextColor(Color.GREEN);
+                    output.setTextColor(Color.parseColor("#ff669900"));
                 }
                 //TextView outputy = findViewById(R.id.textView0);
                 //outputy.setText(String.valueOf(names.length) + String.valueOf(dataList.size()));

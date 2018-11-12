@@ -28,7 +28,7 @@ public class USBinfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usbinfo);
-        setTitle("Linkos Power Monitor");
+        setTitle(" ");
 
         checkingUSB();
 

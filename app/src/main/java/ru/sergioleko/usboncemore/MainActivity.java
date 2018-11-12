@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Linkos Power Monitor");
+        setTitle(" ");
     }
     public void checkUSB (View view){
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
