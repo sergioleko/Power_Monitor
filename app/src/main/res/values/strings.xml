@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">USB PM Checker</string>
+    <string name="app_name">Linkos\' Power Monitor</string>
     <string name="getUSBbutton">CHECK USB</string>
     <string name="connectToUsb">ESTABLISH CONNECTION</string>
     <string name="refresh">REFRESH</string>
-    <string name="autorefresh">AUTOREFRESH</string>
+    <string name="autorefreshon">AUTOREFRESH ON</string>
+    <string name="autorefreshoff">AUTOREFRESH OFF</string>
     <string name="stop">STOP</string>
-    <string name="thermFlag">THERMRIP#</string>
+    <string name="thermFlag">THERMTRIP#</string>
     <string name="su3Flag">SU3</string>
     <string name="su5Flag">SU 5</string>
     <string name="voltages">Voltages:</string>
