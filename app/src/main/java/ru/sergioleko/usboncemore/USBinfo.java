@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.usb.UsbAccessory;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
@@ -40,7 +41,8 @@ public class USBinfo extends AppCompatActivity {
 
     public void checkingUSB() {
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        if (usbmanager != null) {
+        UsbAccessory[] listik = usbmanager.getAccessoryList();
+        if (listik != null) {
             usbmanager.getAccessoryList();
             HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
             TextView text = findViewById(R.id.magicInfo);
@@ -83,8 +85,10 @@ public class USBinfo extends AppCompatActivity {
         }*/
             //return device;
         } else {
-            TextView text = findViewById(R.id.magicInfo);
-            text.setText("No device Connected");
+            Intent errorPageIntent = new Intent(this, ErrorWindow.class);
+            startActivity(errorPageIntent);
+           /* TextView text = findViewById(R.id.magicInfo);
+            text.setText("No device Connected");*/
         }
         //return null;
     }
@@ -95,7 +99,8 @@ public class USBinfo extends AppCompatActivity {
     public void connectingUSB(View view) {
 
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        if (usbmanager != null) {
+        UsbAccessory [] listik = usbmanager.getAccessoryList();
+        if (listik != null) {
             HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
             Set<String> keys = deviceList.keySet();
             Object[] keysArr = keys.toArray();
@@ -112,6 +117,10 @@ public class USBinfo extends AppCompatActivity {
             connectionButton.setVisibility(View.INVISIBLE);
             startReader();*/
 
+        }
+        else {
+            Intent errorPageIntent = new Intent(this, ErrorWindow.class);
+            startActivity(errorPageIntent);
         }
     }
         /*final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {

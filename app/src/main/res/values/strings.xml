@@ -12,4 +12,6 @@
     <string name="voltages">Voltages:</string>
     <string name="temps">Temperatures:</string>
     <string name="minorV">Minor Voltages:</string>
+    <string name="crit_error">no USB connected</string>
+    <string name="retry_button">Retry</string>
 </resources>
