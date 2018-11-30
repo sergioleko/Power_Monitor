@@ -41,10 +41,12 @@ public class USBinfo extends AppCompatActivity {
 
     public void checkingUSB() {
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        UsbAccessory[] listik = usbmanager.getAccessoryList();
-        if (listik != null) {
-            usbmanager.getAccessoryList();
-            HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
+        //UsbAccessory[] listik = usbmanager.getAccessoryList();
+        usbmanager.getAccessoryList();
+        HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
+        if (deviceList != null) {
+            /*usbmanager.getAccessoryList();
+            HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();*/
             TextView text = findViewById(R.id.magicInfo);
             Set<String> keys = deviceList.keySet();
             Object[] keysArr = keys.toArray();
@@ -99,9 +101,11 @@ public class USBinfo extends AppCompatActivity {
     public void connectingUSB(View view) {
 
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        UsbAccessory [] listik = usbmanager.getAccessoryList();
-        if (listik != null) {
-            HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
+        usbmanager.getAccessoryList();
+        HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
+        //UsbAccessory [] listik = usbmanager.getAccessoryList();
+        if (deviceList != null) {
+            //HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
             Set<String> keys = deviceList.keySet();
             Object[] keysArr = keys.toArray();
             String lfkey = keysArr[0].toString();

@@ -11,6 +11,7 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -22,7 +23,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -65,6 +73,48 @@ public class shower extends AppCompatActivity {
 
 
         });*/
+
+        //Toast toast = Toast.makeText(getApplicationContext(),privateDir.toString(), Toast.LENGTH_SHORT);
+        //toast.show();
+        Calendar calender = Calendar.getInstance();
+        SimpleDateFormat dformat = new SimpleDateFormat("yyyy_MM_dd");
+        String date = dformat.format(calender.getTime());
+        SimpleDateFormat tformat = new SimpleDateFormat("HH:mm:ss");
+        String time = tformat.format(calender.getTime());
+        //Toast toast = Toast.makeText(getApplicationContext(),date, Toast.LENGTH_SHORT);
+        //toast.show();
+        String exStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String myDir = "linkoslogs" + File.separator + date;
+        String fileName = date + "_log.txt";
+        File myDiry = new File(exStorage + File.separator + myDir);
+        if (!myDiry.exists()){
+            myDiry.mkdirs();
+        }
+        File file = new File(exStorage + File.separator + myDir, fileName);
+        FileOutputStream fos = null;
+        String value = "New logging session \n\r Time; \t DA1°C; \t +2.5V; \t +1.8V; \t +1.2V; \t 1V; \t DA6°C; \t ?; \t +5V; \t +1.8V; \t +0.95; \t +3.3V; \t +1.5V; \t +12V; \t DA2°C; \t DA7°C; \t +5V; \n\r";
+        try {
+            fos = new FileOutputStream(file, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (fos != null) {
+            try {
+                fos.write(value.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         startReader();
 
 
@@ -73,8 +123,10 @@ public class shower extends AppCompatActivity {
 
     public void startReader() {
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        UsbAccessory[] listik = usbmanager.getAccessoryList();
-        if (listik != null) {
+        //UsbAccessory[] listik = usbmanager.getAccessoryList();
+        usbmanager.getAccessoryList();
+        HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
+        if (deviceList != null) {
             byte[] bytes = new byte[64];
             List<Float> dataList = new ArrayList<Float>();
             // TextView text = findViewById(R.id.showerText);
@@ -84,7 +136,7 @@ public class shower extends AppCompatActivity {
             //Button refreshButton = findViewById(R.id.refreshButtonShower);
             //UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
 
-                HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
+                //HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
                 Set<String> keys = deviceList.keySet();
                 Object[] keysArr = keys.toArray();
                // assert keysArr != null;
@@ -155,13 +207,14 @@ public class shower extends AppCompatActivity {
 
                 //text.setText(String.valueOf(dataList.size()));
 
-
-
+        //return dataList;
+        createLog(dataList);
         }
 
     else {
             Intent errorPageIntent = new Intent(this, ErrorWindow.class);
             startActivity(errorPageIntent);}
+            //return null;
     }
 
     public void refresher(View view) {
@@ -182,6 +235,7 @@ public class shower extends AppCompatActivity {
             public void run() {
                 if (onoff){
                     startReader();
+                    //createLog(startReader());
                     switchHandler.postDelayed(this, 1000);
                 }
                 else {
@@ -214,6 +268,60 @@ public class shower extends AppCompatActivity {
         }
         return onoff;
     }
+
+
+
+    public void createLog (List<Float> dataList){
+
+        //File privateDir = new File(getExternalFilesDir(null).getAbsolutePath());
+
+        //Toast toast = Toast.makeText(getApplicationContext(),privateDir.toString(), Toast.LENGTH_SHORT);
+        //toast.show();
+        Calendar calender = Calendar.getInstance();
+        SimpleDateFormat dformat = new SimpleDateFormat("yyyy_MM_dd");
+        String date = dformat.format(calender.getTime());
+        SimpleDateFormat tformat = new SimpleDateFormat("HH:mm:ss");
+        String time = tformat.format(calender.getTime());
+        //Toast toast = Toast.makeText(getApplicationContext(),date, Toast.LENGTH_SHORT);
+        //toast.show();
+        String exStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String myDir = "linkoslogs" + File.separator + date;
+        String fileName = date + "_log.txt";
+
+        File file = new File(exStorage + File.separator + myDir, fileName);
+        FileOutputStream fos = null;
+        String value = time;
+        for (int i = 0; i < dataList.size(); i++){
+            value += String.valueOf(dataList.get(i)) + ";\t";
+        }
+        value += "\n \r";
+
+        try {
+            fos = new FileOutputStream(file, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        //OutputStreamWriter osw = new OutputStreamWriter(fos);
+        if (fos != null) {
+            try {
+                fos.write(value.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }
 
 
