@@ -1,8 +1,10 @@
 package ru.sergioleko.usboncemore;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbAccessory;
 import android.hardware.usb.UsbDevice;
@@ -12,11 +14,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -33,34 +37,46 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSION_REQUESTS_WRITE_EXTERNAL_STORAGE);
 
         }
-    }
-    public void checkUSB (View view){
-        UsbManager usbmanager;
-        usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        usbmanager.getAccessoryList();
-        HashMap<String, UsbDevice> deviceList = null;
-        deviceList = usbmanager.getDeviceList();
-       //UsbAccessory [] listik = usbmanager.getAccessoryList();
 
-        if (deviceList != null) {
-            //Toast toast = Toast.makeText(getApplicationContext(), deviceList.size(), Toast.LENGTH_LONG);
-            //toast.show();
+
+    }
+
+    public void checkUSB (View view) {
+
+
+        UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        if (usbmanager.getDeviceList().size() > 0) {
+            //Toast.makeText(MainActivity.this, String.valueOf(usbmanager.getDeviceList().size()), Toast.LENGTH_LONG).show();
+
+
+            //usbmanager.getAccessoryList();
+            HashMap<String, UsbDevice> deviceList = usbmanager.getDeviceList();
+
+            Set<String> keys = deviceList.keySet();
+            Object[] keysArr = keys.toArray();
+            String lfkey = keysArr[0].toString();
+
+
+            UsbDevice device = deviceList.get(lfkey);
+
+            //UsbAccessory [] listik = usbmanager.getAccessoryList();
+
+            //if (deviceList != null) {
+
 
             Intent checkUSBintent = new Intent(this, USBinfo.class);
             startActivity(checkUSBintent);
-        }
-        else {
-            Toast toast = Toast.makeText(getApplicationContext(), "no device", Toast.LENGTH_LONG);
-            toast.show();
-            //Intent errorPageIntent = new Intent(this, ErrorWindow.class);
-            //startActivity(errorPageIntent);
-            //TextView exceptionText = (TextView) findViewById(R.id.exceptText);
-            //exceptionText.setVisibility(View.VISIBLE);
-            //exceptionText.setText("No USB device connected");
+
+
+        } else {
+
+            Intent errorPageIntent = new Intent(this, ErrorWindow.class);
+            startActivity(errorPageIntent);
+
 
         }
+
     }
-
     public void onRequestPermissionsResult(
             int requestCode,
             String permissions[],
@@ -75,5 +91,14 @@ public class MainActivity extends AppCompatActivity {
                 }
         }
     }
+
+
+
+    public void startErroeActivity(){
+        Intent errorPageIntent = new Intent(this, ErrorWindow.class);
+        startActivity(errorPageIntent);
+    }
+
+
 
 }

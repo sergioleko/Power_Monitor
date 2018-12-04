@@ -3,6 +3,7 @@
     package="ru.sergioleko.usboncemore">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.usb.host" />
+    <uses-feature android:name="android.hardware.usb.accessory" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +28,10 @@
         <activity
             android:name=".shower"
             android:screenOrientation="portrait" />
-        <activity android:name=".ErrorWindow"></activity>
+        <activity
+            android:name=".ErrorWindow"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

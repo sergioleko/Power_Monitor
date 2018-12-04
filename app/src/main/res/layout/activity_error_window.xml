@@ -33,12 +33,11 @@
         android:background="@color/colorAccent"
         android:fontFamily="@font/terminus"
         android:onClick="restart"
-        android:text="Button"
+        android:text="@string/retry_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998"
-        tools:text="@string/retry_button" />
+        app:layout_constraintVertical_bias="0.998" />
 </android.support.constraint.ConstraintLayout>
