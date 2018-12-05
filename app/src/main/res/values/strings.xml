@@ -14,4 +14,6 @@
     <string name="minorV">Minor Voltages:</string>
     <string name="crit_error">no USB connected</string>
     <string name="retry_button">Retry</string>
+    <string name="log_off_button">LOG OFF</string>
+    <string name="log_on_button">LOG ON</string>
 </resources>

@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,7 +48,7 @@ public class shower extends AppCompatActivity {
 
         setTitle(" ");
 
-        Calendar calender = Calendar.getInstance();
+        /*Calendar calender = Calendar.getInstance();
         SimpleDateFormat dformat = new SimpleDateFormat("yyyy_MM_dd");
         String date = dformat.format(calender.getTime());
         SimpleDateFormat tformat = new SimpleDateFormat("HH:mm:ss");
@@ -55,40 +56,11 @@ public class shower extends AppCompatActivity {
 
         String exStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
         String myDir = "linkoslogs" + File.separator + date;
-        String fileName = date + "_log.txt";
-        File myDiry = new File(exStorage + File.separator + myDir);
-        if ((Environment.getExternalStorageDirectory().getFreeSpace() / 1024 / 1024) > 20) {
-            if (!myDiry.exists()) {
-                myDiry.mkdirs();
-            }
-            File file = new File(exStorage + File.separator + myDir, fileName);
-            FileOutputStream fos = null;
-            String value = "New logging session \n\r Time; \t DA1°C; \t +2.5V; \t +1.8V; \t +1.2V; \t 1V; \t DA6°C; \t ?; \t +5V; \t +1.8V; \t +0.95; \t +3.3V; \t +1.5V; \t +12V; \t DA2°C; \t DA7°C; \t +5V; \n\r";
-            try {
-                fos = new FileOutputStream(file, true);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            if (fos != null) {
-                try {
-                    fos.write(value.getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fos.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            Toast.makeText(shower.this, "Not enough disk space for logs", Toast.LENGTH_SHORT).show();
-        }
+        String fileName = date + "_log.txt";*/
+
+        //if ((Environment.getExternalStorageDirectory().getFreeSpace() / 1024 / 1024) > 20) {
+        ToggleButton tb = findViewById(R.id.toggleButton);
+        tb.setChecked(false);
         startReader();
 
 
@@ -236,68 +208,105 @@ public class shower extends AppCompatActivity {
 
     public boolean checkOnOff() {
         Button switchShower = findViewById(R.id.autorefreshbutton);
-        String stringy = getString(R.string.autorefreshon);
+        String stringy = getString(R.string.autorefreshoff);
 
         if (switchShower.getText().toString().equals(stringy)) {
             onoff = true;
-            switchShower.setText(R.string.autorefreshoff);
+            switchShower.setText(R.string.autorefreshon);
         } else {
             onoff = false;
-            switchShower.setText(R.string.autorefreshon);
+            switchShower.setText(R.string.autorefreshoff);
         }
         return onoff;
     }
 
 
     public void createLog(List<Float> dataList) {
+        ToggleButton tb = findViewById(R.id.toggleButton);
+        if (tb.isChecked()) {
+            Calendar calender = Calendar.getInstance();
+            SimpleDateFormat dformat = new SimpleDateFormat("yyyy_MM_dd");
+            String date = dformat.format(calender.getTime());
+            SimpleDateFormat tformat = new SimpleDateFormat("HH:mm:ss");
+            String time = tformat.format(calender.getTime());
 
+            String exStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+            String myDir = "linkoslogs" + File.separator + date;
+            String fileName = date + "_log.txt";
+            if ((Environment.getExternalStorageDirectory().getFreeSpace() / 1024 / 1024) > 20) {
 
-        Calendar calender = Calendar.getInstance();
-        SimpleDateFormat dformat = new SimpleDateFormat("yyyy_MM_dd");
-        String date = dformat.format(calender.getTime());
-        SimpleDateFormat tformat = new SimpleDateFormat("HH:mm:ss");
-        String time = tformat.format(calender.getTime());
-
-        String exStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String myDir = "linkoslogs" + File.separator + date;
-        String fileName = date + "_log.txt";
-        if ((Environment.getExternalStorageDirectory().getFreeSpace() / 1024 / 1024) > 20) {
-            File file = new File(exStorage + File.separator + myDir, fileName);
-            FileOutputStream fos = null;
-            String value = time;
-            for (int i = 0; i < dataList.size(); i++) {
-                value += String.valueOf(dataList.get(i)) + ";\t";
-            }
-            value += "\n \r";
-
-            try {
-                fos = new FileOutputStream(file, true);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            if (fos != null) {
-                try {
-                    fos.write(value.getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                File myDiry = new File(exStorage + File.separator + myDir);
+                if (!myDiry.exists()) {
+                    myDiry.mkdirs();
                 }
-                try {
-                    fos.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
-        } else {
-            Toast.makeText(shower.this, "Not enough disk space for logs", Toast.LENGTH_SHORT).show();
+                File file = new File(exStorage + File.separator + myDir, fileName);
+                if (!file.exists()) {
+                    FileOutputStream fos = null;
+                    String value = "Time; \t DA1°C; \t +2.5V; \t +1.8V; \t +1.2V; \t 1V; \t DA6°C; \t ?; \t +5V; \t +1.8V; \t +0.95; \t +3.3V; \t +1.5V; \t +12V; \t DA2°C; \t DA7°C; \t +5V; \n\r";
+                    try {
+                        fos = new FileOutputStream(file, true);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    if (fos != null) {
+                        try {
+                            fos.write(value.getBytes());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            fos.flush();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(shower.this, "Not enough disk space for logs", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+
+
+                    FileOutputStream fos = null;
+                    String value = "\n\r" + time;
+                    for (int i = 0; i < dataList.size(); i++) {
+                        value += String.valueOf(dataList.get(i)) + ";\t";
+                    }
+                    value += "\n \r";
+
+                    try {
+                        fos = new FileOutputStream(file, true);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (fos != null) {
+                        try {
+                            fos.write(value.getBytes());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            fos.flush();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(shower.this, "Not enough disk space for logs", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
         }
-
     }
 
 }
