@@ -59,11 +59,11 @@ public class USBinfo extends AppCompatActivity {
                 int vendorId = device.getVendorId();
                 int productId = device.getProductId();
                 if (vendorId == /*2385*/1240 && productId == /*5734*/95) {
-                    text.setText("Linkos' Power Monitor is found");
+                    text.setText(getString(R.string.onpmdetected));
                     Button connectionButton = findViewById(R.id.buttonConnect);
                     connectionButton.setVisibility(View.VISIBLE);
                 } else {
-                    text.setText("Vendor ID is: " + String.valueOf(vendorId) + ". Product ID is: " + String.valueOf(productId));
+                    text.setText(getString(R.string.onuddetected) + "\n" + "Vendor ID is: " + String.valueOf(vendorId) + ". \nProduct ID is: " + String.valueOf(productId));
                 }
             } else {
                 text.setText("No such device");
@@ -138,7 +138,7 @@ public class USBinfo extends AppCompatActivity {
                             //call method to set up device communication
                         }
                     } else {
-                        text.setText("Permission Denied");
+                        text.setText(getString(R.string.permissiondenied));
                         //Log.d(TAG, "permission denied for device " + device);
                     }
                 }

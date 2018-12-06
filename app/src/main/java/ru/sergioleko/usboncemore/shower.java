@@ -39,6 +39,7 @@ import java.util.Set;
 
 public class shower extends AppCompatActivity {
     boolean onoff = false;
+    boolean offon = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,10 @@ public class shower extends AppCompatActivity {
         //if ((Environment.getExternalStorageDirectory().getFreeSpace() / 1024 / 1024) > 20) {
         ToggleButton tb = findViewById(R.id.toggleButton);
         tb.setChecked(false);
+        TextView tw = findViewById(R.id.logstatus);
+        tw.setText(R.string.log_off_button);
+        TextView as = findViewById(R.id.autostatus);
+        as.setText(R.string.autorefreshoff);
         startReader();
 
 
@@ -207,23 +212,46 @@ public class shower extends AppCompatActivity {
     }
 
     public boolean checkOnOff() {
-        Button switchShower = findViewById(R.id.autorefreshbutton);
+        TextView switchShower = findViewById(R.id.autostatus);
         String stringy = getString(R.string.autorefreshoff);
 
-        if (switchShower.getText().toString().equals(stringy)) {
-            onoff = true;
-            switchShower.setText(R.string.autorefreshon);
-        } else {
-            onoff = false;
-            switchShower.setText(R.string.autorefreshoff);
+
+            if (switchShower.getText().toString().equals(stringy)) {
+                onoff = true;
+                switchShower.setText(R.string.autorefreshon);
+            } else {
+                onoff = false;
+                switchShower.setText(R.string.autorefreshoff);
+            }
+
+return onoff;
+    }
+
+    public  void getoffon (View view){
+        logOnOff();
+    }
+
+    public boolean logOnOff () {
+        TextView tw = findViewById(R.id.logstatus);
+        String stringy = getString(R.string.log_off_button);
+        if (tw.getText().toString().equals(stringy)){
+            offon = true;
+            tw.setText(R.string.log_on_button);
         }
-        return onoff;
+        else {
+            offon = false;
+            tw.setText(R.string.log_off_button);
+        }
+        return offon;
     }
 
 
     public void createLog(List<Float> dataList) {
-        ToggleButton tb = findViewById(R.id.toggleButton);
-        if (tb.isChecked()) {
+
+       // ToggleButton tb = findViewById(R.id.toggleButton);
+        //TextView ls = findViewById(R.id.logstatus);
+        if (offon) {
+          //  ls.setText(R.string.log_on_button);
             Calendar calender = Calendar.getInstance();
             SimpleDateFormat dformat = new SimpleDateFormat("yyyy_MM_dd");
             String date = dformat.format(calender.getTime());
@@ -266,7 +294,7 @@ public class shower extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     } else {
-                        Toast.makeText(shower.this, "Not enough disk space for logs", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(shower.this, getString(R.string.notenoughmemorytext), Toast.LENGTH_SHORT).show();
                     }
                 } else {
 
@@ -301,11 +329,14 @@ public class shower extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     } else {
-                        Toast.makeText(shower.this, "Not enough disk space for logs", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(shower.this, getString(R.string.notenoughmemorytext), Toast.LENGTH_SHORT).show();
                     }
                 }
 
             }
+        }
+        else {
+           // ls.setText(R.string.log_off_button);
         }
     }
 

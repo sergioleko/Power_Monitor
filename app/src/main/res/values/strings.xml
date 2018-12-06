@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Linkos\' Power Monitor</string>
-    <string name="getUSBbutton">CHECK USB</string>
-    <string name="connectToUsb">ESTABLISH CONNECTION</string>
-    <string name="refresh">REFRESH</string>
-    <string name="autorefreshon">AUTOREFRESH ON</string>
-    <string name="autorefreshoff">AUTOREFRESH OFF</string>
-    <string name="stop">STOP</string>
+    <string name="app_name">LPM App</string>
+    <string name="getUSBbutton">Check USB</string>
+    <string name="connectToUsb">Establish connection</string>
+    <string name="refresh">Refresh</string>
+    <string name="autorefreshon">Autorefresh On</string>
+    <string name="autorefreshoff">Autorefresh Off</string>
+    <string name="stop">Stop</string>
     <string name="thermFlag">THERMTRIP#</string>
     <string name="su3Flag">SU3</string>
     <string name="su5Flag">SU 5</string>
@@ -14,6 +14,13 @@
     <string name="minorV">Minor Voltages:</string>
     <string name="crit_error">no USB connected</string>
     <string name="retry_button">Retry</string>
-    <string name="log_off_button">LOG OFF</string>
-    <string name="log_on_button">LOG ON</string>
+    <string name="log_off_button">Log Off</string>
+    <string name="log_on_button">Log On</string>
+    <string name="notenoughmemorytext">Not enough memory</string>
+    <string name="permissiongranted">Permission granted</string>
+    <string name="permissiondenied">Permission denied</string>
+    <string name="onpmdetected">Linkos Power Monitor Detected</string>
+    <string name="onuddetected">Unknown device detected</string>
+    <string name="log">Log</string>
+    <string name="autorefresh">Autorefresh</string>
 </resources>

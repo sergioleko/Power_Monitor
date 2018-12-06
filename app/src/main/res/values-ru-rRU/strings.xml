@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LPM App</string>
+    <string name="getUSBbutton">Проверить USB</string>
+    <string name="connectToUsb">Подключение</string>
+    <string name="refresh">Обновить</string>
+    <string name="autorefreshon">Авто вкл.</string>
+    <string name="autorefreshoff">Авто Выкл.</string>
+    <string name="stop">Стоп</string>
+    <string name="voltages">Напряжения</string>
+    <string name="temps">Температуры</string>
+    <string name="minorV">Дополнительные напряжения</string>
+    <string name="crit_error">USB не подключен</string>
+    <string name="retry_button">В начало</string>
+    <string name="log_off_button">Лог Выкл.</string>
+    <string name="log_on_button">Лог Вкл.</string>
+    <string name="thermFlag">THERMTRIP#</string>
+    <string name="su3Flag">SU3</string>
+    <string name="su5Flag">SU5</string>
+    <string name="notenoughmemorytext">Недостаточно памяти для записи лога</string>
+    <string name="permissiongranted">Разрешение получено</string>
+    <string name="permissiondenied">Разрешение не получено</string>
+    <string name="onpmdetected">Обнаружено устройство LPM</string>
+    <string name="onuddetected">Обнаружено неизвестное устройство</string>
+    <string name="log">Лог</string>
+    <string name="autorefresh">Автообновление</string>
+</resources>
