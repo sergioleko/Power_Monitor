@@ -10,9 +10,12 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -165,11 +168,24 @@ public class shower extends AppCompatActivity {
     }
 
     public void refresher(View view) {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        else {
+            v.vibrate(50);
+        }
         startReader();
     }
 
     public void autorefresher(View view) {
-
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        else {
+            v.vibrate(50);
+        }
         final Handler switchHandler = new Handler();
         checkOnOff();
         //UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
@@ -228,6 +244,13 @@ return onoff;
     }
 
     public  void getoffon (View view){
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        else {
+            v.vibrate(50);
+        }
         logOnOff();
     }
 

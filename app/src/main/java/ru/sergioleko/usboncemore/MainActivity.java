@@ -9,6 +9,9 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbAccessory;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +28,7 @@ import java.util.Set;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
+
   private final int MY_PERMISSION_REQUESTS_WRITE_EXTERNAL_STORAGE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkUSB (View view) {
-
-
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        else {
+            v.vibrate(50);
+        }
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
         if (usbmanager.getDeviceList().size() > 0) {
             //Toast.makeText(MainActivity.this, String.valueOf(usbmanager.getDeviceList().size()), Toast.LENGTH_LONG).show();

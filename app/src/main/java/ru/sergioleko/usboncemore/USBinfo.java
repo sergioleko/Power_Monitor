@@ -12,7 +12,10 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -83,7 +86,13 @@ public class USBinfo extends AppCompatActivity {
             "ru.sergioleko.usboncemore.USB_PERMISSION";
 
     public void connectingUSB(View view) {
-
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        else {
+            v.vibrate(50);
+        }
         UsbManager usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
         //usbmanager.getAccessoryList();
 
