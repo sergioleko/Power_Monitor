@@ -23,4 +23,6 @@
     <string name="onuddetected">Unknown device detected</string>
     <string name="log">Log</string>
     <string name="autorefresh">Autorefresh</string>
+    <string name="sus3">Suspend 3</string>
+    <string name="sus5">Suspend 5</string>
 </resources>

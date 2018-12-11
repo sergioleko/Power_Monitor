@@ -7,6 +7,7 @@
     android:background="@android:color/background_dark">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="361dp"
         android:layout_marginTop="8dp"
@@ -16,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.426">
+        app:layout_constraintVertical_bias="0.315">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -270,77 +271,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:autoSizeTextType="uniform"
-        android:checked="false"
-        android:clickable="false"
-        android:fontFamily="@font/terminus"
-        android:maxLines="1"
-        android:text="@string/su5Flag"
-        android:textColor="@android:color/holo_green_dark"
-        android:textColorHint="@android:color/holo_green_dark"
-        android:textColorLink="@android:color/holo_red_light"
-        app:layout_constraintBottom_toBottomOf="@+id/toggleButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.008"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015"
-        tools:text="@string/su5Flag" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:checked="false"
-        android:clickable="false"
-        android:fontFamily="@font/terminus"
-        android:text="@string/su3Flag"
-        android:textColor="@android:color/holo_green_dark"
-        android:textColorHint="@android:color/holo_green_dark"
-        android:textColorLink="@android:color/holo_red_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autoSizeTextType="uniform"
-        android:maxLines="1"
-        tools:text="@string/su3Flag" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:checked="false"
-        android:clickable="false"
-        android:fontFamily="@font/terminus"
-        android:text="@string/thermFlag"
-        android:textColor="@android:color/holo_green_dark"
-        android:textColorHint="@android:color/holo_green_dark"
-        android:textColorLink="@android:color/holo_red_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autoSizeTextType="uniform"
-        android:maxLines="1"
-        tools:text="@string/thermFlag" />
-
     <Button
         android:id="@+id/autorefreshbutton"
         android:layout_width="115dp"
@@ -424,5 +354,71 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.869" />
+
+    <TextView
+        android:id="@+id/sus3text"
+        android:layout_width="115dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/terminus"
+        android:text="@string/sus3"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/sus5text"
+        android:layout_width="115dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/terminus"
+        android:text="@string/sus5"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/thrmtrp"
+        android:layout_width="115dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/terminus"
+        android:text="@string/thermFlag"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/toggleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015" />
 
 </android.support.constraint.ConstraintLayout>

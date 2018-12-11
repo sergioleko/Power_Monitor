@@ -84,10 +84,14 @@ public class shower extends AppCompatActivity {
             byte[] bytes = new byte[64];
             List<Float> dataList = new ArrayList<Float>();
 
-            CheckBox su3 = (CheckBox) findViewById(R.id.checkBox3);
+            TextView su3 = (TextView) findViewById(R.id.sus3text);
+            TextView su5 = (TextView) findViewById(R.id.sus5text);
+            TextView thrm = (TextView) findViewById(R.id.thrmtrp);
+
+            /*CheckBox su3 = (CheckBox) findViewById(R.id.checkBox3);
             CheckBox su5 = (CheckBox) findViewById(R.id.checkBox);
             CheckBox thrm = (CheckBox) findViewById(R.id.checkBox2);
-
+*/
 
             Set<String> keys = deviceList.keySet();
             Object[] keysArr = keys.toArray();
@@ -111,7 +115,7 @@ public class shower extends AppCompatActivity {
             float[] maxValues = new float[]{60.0f, 2.51f, 1.91f, 1.31f, 1.11f, 40.0f, 40.0f, 5.11f, 1.91f, 1.11f, 3.41f, 1.61f, 12.11f, 40.0f, 40.0f};
             float[] minvalues = new float[]{0.0f, 2.29f, 1.69f, 1.09f, 0.89f, 0.0f, 0.0f, 4.89f, 1.69f, 0.89f, 3.19f, 1.39f, 1.9f, 0.0f, 0.0f};
 
-            for (int i = 0; i < bytes.length - 4; i += 4) {
+            for (int i = 0; i < bytes.length; i += 4) {
                 int floatBits = bytes[i] & 0xFF |
                         (bytes[i + 1] & 0xFF) << 8 |
                         (bytes[i + 2] & 0xFF) << 16 |
@@ -121,7 +125,7 @@ public class shower extends AppCompatActivity {
 
 
             }
-            for (int c = 0; c < dataList.size(); c++) {
+            for (int c = 0; c < dataList.size() - 1; c++) {
                 String textviewid = "textView" + c;
                 int resID = getResources().getIdentifier(textviewid, "id", getPackageName());
                 TextView output = findViewById(resID);
@@ -134,25 +138,34 @@ public class shower extends AppCompatActivity {
                 }
 
             }
-            if ((bytes[bytes.length - 4] & 0x01) != 0) {
-                thrm.setChecked(true);
+            int wtf = Math.round(dataList.get(dataList.size() - 1));
+            //Toast.makeText(shower.this, dataList.get(dataList.size() - 1).toString(), Toast.LENGTH_SHORT).show();
+            /*if (wtf == 13) {
+                Toast.makeText(shower.this, "13", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(shower.this, "not 13", Toast.LENGTH_SHORT).show();
+            }*/
+            Byte bwtf = (byte)(wtf & 0xFF);
+            if ((bwtf & 0x01) == 0) {
+                thrm.setVisibility(View.VISIBLE);
                 thrm.setTextColor(Color.RED);
             } else {
-                thrm.setChecked(false);
+                thrm.setVisibility(View.INVISIBLE);
                 thrm.setTextColor(Color.GREEN);
             }
-            if ((bytes[bytes.length - 4] & 0x04) != 0) {
-                su3.setChecked(true);
+            if ((bwtf & 0x04) == 0) {
+                su3.setVisibility(View.VISIBLE);
                 su3.setTextColor(Color.RED);
             } else {
-                su3.setChecked(false);
+                su3.setVisibility(View.INVISIBLE);
                 su3.setTextColor(Color.GREEN);
             }
-            if ((bytes[bytes.length - 4] & 0x08) != 0) {
-                su5.setChecked(true);
+            if ((bwtf & 0x08) == 0) {
+                su5.setVisibility(View.VISIBLE);
                 su5.setTextColor(Color.RED);
             } else {
-                su5.setChecked(false);
+                su5.setVisibility(View.INVISIBLE);
                 su5.setTextColor(Color.GREEN);
             }
 
